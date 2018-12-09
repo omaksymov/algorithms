@@ -9,7 +9,7 @@ import java.util.List;
  * NOTE: Given implementation assumes that graph nodes are represented by 0-based indices.
  */
 public class AdjacencyList {
-    List<List<Integer>> adjacencyList;
+    public List<List<Integer>> adjacencyList;
 
     public AdjacencyList(List<List<Integer>> adjacencyList) {
         this.adjacencyList = new ArrayList<>(adjacencyList);
