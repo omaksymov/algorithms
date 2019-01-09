@@ -1,6 +1,6 @@
 package leetcode;
 
-import data_structure.list.Node;
+import data_structure.list.ListNode;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class InsertIntoCyclicSortedList708Test {
 
     @Test
     public void insertIntoEmptyList() {
-        Node resHead = solution.insert(null, 1);
+        ListNode resHead = solution.insert(null, 1);
         assertThat(resHead.val,equalTo(1));
         assertNull(resHead.next);
     }
@@ -27,11 +27,11 @@ public class InsertIntoCyclicSortedList708Test {
     @Test
     public void insertGreaterIntoSingleElementList() {
         // Given
-        Node head = new Node(1);
+        ListNode head = new ListNode(1);
         head.next = head;
         int insertVal = 2;
         // When
-        Node resHead = solution.insert(head, insertVal);
+        ListNode resHead = solution.insert(head, insertVal);
         // Then
         assertThat(resHead == head, is(true));
         assertThat(resHead.next.val, equalTo(insertVal));
@@ -41,11 +41,11 @@ public class InsertIntoCyclicSortedList708Test {
     @Test
     public void insertSmallerIntoSingleElementList() {
         // Given
-        Node head = new Node(1);
+        ListNode head = new ListNode(1);
         head.next = head;
         int insertVal = 0;
         // When
-        Node resHead = solution.insert(head, insertVal);
+        ListNode resHead = solution.insert(head, insertVal);
         // Then
         assertThat(resHead == head, is(true));
         assertThat(resHead.next.val, equalTo(insertVal));
@@ -55,15 +55,15 @@ public class InsertIntoCyclicSortedList708Test {
     @Test
     public void insertIntoEqualElementsList() {
         // Given
-        Node node1 = new Node(3);
-        Node node2 = new Node(3);
-        Node node3 = new Node(3);
+        ListNode node1 = new ListNode(3);
+        ListNode node2 = new ListNode(3);
+        ListNode node3 = new ListNode(3);
         node1.next = node2;
         node2.next = node3;
         node3.next = node1;
         int insertVal = 2;
         // When
-        Node resHead = solution.insert(node1, insertVal);
+        ListNode resHead = solution.insert(node1, insertVal);
         // Then
         assertThat(resHead == node1, is(true));
         assertThat(isListCyclicSortedWithValuePresent(resHead, insertVal, 0), is(true));
@@ -72,15 +72,15 @@ public class InsertIntoCyclicSortedList708Test {
     @Test
     public void insertIntoEndOfSortedPart(){
         // Given
-        Node node1 = new Node(1);
-        Node node2 = new Node(3);
-        Node node3 = new Node(5);
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(3);
+        ListNode node3 = new ListNode(5);
         node1.next = node2;
         node2.next = node3;
         node3.next = node1;
         int insertVal = 7;
         // When
-        Node resHead = solution.insert(node2, insertVal);
+        ListNode resHead = solution.insert(node2, insertVal);
         // Then
         assertThat(resHead == node2, is(true));
         assertThat(isListCyclicSortedWithValuePresent(resHead, insertVal, 0), is(true));
@@ -89,15 +89,15 @@ public class InsertIntoCyclicSortedList708Test {
     @Test
     public void insertBeforeSortedPart(){
         // Given
-        Node node1 = new Node(1);
-        Node node2 = new Node(3);
-        Node node3 = new Node(5);
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(3);
+        ListNode node3 = new ListNode(5);
         node1.next = node2;
         node2.next = node3;
         node3.next = node1;
         int insertVal = 0;
         // When
-        Node resHead = solution.insert(node2, insertVal);
+        ListNode resHead = solution.insert(node2, insertVal);
         // Then
         assertThat(resHead == node2, is(true));
         assertThat(isListCyclicSortedWithValuePresent(resHead, insertVal, 0), is(true));
@@ -106,17 +106,17 @@ public class InsertIntoCyclicSortedList708Test {
     @Test
     public void insertIntoListWhereSameValuePresent(){
         // Given
-        Node node1 = new Node(1);
-        Node node2 = new Node(3);
-        Node node3 = new Node(3);
-        Node node4 = new Node(5);
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(3);
+        ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(5);
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
         node4.next = node1;
         int insertVal = 3;
         // When
-        Node resHead = solution.insert(node3, insertVal);
+        ListNode resHead = solution.insert(node3, insertVal);
         // Then
         assertThat(resHead == node3, is(true));
         assertThat(isListCyclicSortedWithValuePresent(resHead, insertVal, 2), is(true));
@@ -130,10 +130,10 @@ public class InsertIntoCyclicSortedList708Test {
      * @return true if resulting list is cyclic sorted and number of nodes with same value as inserted is exactly 1 more
      * than in initial list
      */
-    private boolean isListCyclicSortedWithValuePresent(Node head, int valToCheck, int sameValueCount) {
+    private boolean isListCyclicSortedWithValuePresent(ListNode head, int valToCheck, int sameValueCount) {
         // we assume that list remains cyclic, so no check for cycle
-        Node curNode = head;
-        Node nextNode = head.next;
+        ListNode curNode = head;
+        ListNode nextNode = head.next;
         int insertedValueCount = 0;
         // in cyclic sorted list there should be not more than 1 drop (i.e. in 1->2->3->1 3->1 is a drop)
         int dropCount = 0;

@@ -3,17 +3,17 @@ package data_structure.list;
 /**
  * Singly linked list node
  */
-public class Node {
+public class ListNode {
     public int val;
-    public Node next;
+    public ListNode next;
 
-    public Node() {}
+    public ListNode() {}
 
-    public Node(int val) {
+    public ListNode(int val) {
         this(val, null);
     }
 
-    public Node(int val, Node next) {
+    public ListNode(int val, ListNode next) {
         this.val = val;
         this.next = next;
     }

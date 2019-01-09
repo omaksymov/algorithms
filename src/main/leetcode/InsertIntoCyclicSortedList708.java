@@ -1,15 +1,15 @@
 package leetcode;
 
-import data_structure.list.Node;
+import data_structure.list.ListNode;
 
 public class InsertIntoCyclicSortedList708 {
-    public Node insert(Node head, int insertVal) {
+    public ListNode insert(ListNode head, int insertVal) {
         if (head == null) {
-            head = new Node(insertVal);
+            head = new ListNode(insertVal);
             return head;
         }
-        Node curNode = head;
-        Node nextNode = head.next;
+        ListNode curNode = head;
+        ListNode nextNode = head.next;
         while (true) {
             if (nextNode.val > curNode.val) {
                 if (insertVal >= curNode.val && insertVal <= nextNode.val) {
@@ -31,9 +31,9 @@ public class InsertIntoCyclicSortedList708 {
         return head;
     }
 
-    private void insertNode(Node curNode, int insertVal) {
-        Node node = new Node(insertVal);
-        Node nextNode = curNode.next;
+    private void insertNode(ListNode curNode, int insertVal) {
+        ListNode node = new ListNode(insertVal);
+        ListNode nextNode = curNode.next;
         curNode.next = node;
         node.next = nextNode;
     }
