@@ -39,8 +39,15 @@ public class ProjectionAreaOf3DShapes883Test {
     }
 
     @Test
-    public void projectionArea() {
-        ProjectionAreaOf3DShapes883 solution = new ProjectionAreaOf3DShapes883();
+    public void projectionAreaSolution1() {
+        ProjectionAreaOf3DShapes883.Solution1 solution = new ProjectionAreaOf3DShapes883.Solution1();
+        int actualArea = solution.projectionArea(testItem.grid);
+        assertEquals(testItem.expectedArea, actualArea);
+    }
+
+    @Test
+    public void projectionAreaSolution2() {
+        ProjectionAreaOf3DShapes883.Solution2 solution = new ProjectionAreaOf3DShapes883.Solution2();
         int actualArea = solution.projectionArea(testItem.grid);
         assertEquals(testItem.expectedArea, actualArea);
     }
