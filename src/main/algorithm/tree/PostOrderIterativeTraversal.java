@@ -75,17 +75,19 @@ public class PostOrderIterativeTraversal {
 
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,3,n,n,4,5]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,3,null,null,4,5]";
        /*
             1
            / \
           2   3
              / \
             4   5
+
+          Expected output: [2,4,5,3,1]
         */
         PostOrderIterativeTraversal sol = new PostOrderIterativeTraversal();
-        List<Integer> res = sol.postorderTraversal(serializator.deserialize(treeSample));
+        List<Integer> res = sol.postorderTraversal(serializer.deserialize(treeSample));
         System.out.println(res.toString());
     }
 }

@@ -24,16 +24,18 @@ public class PreOrderRecursiveTraversal {
     }
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,3,n,n,4,5]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,3,null,null,4,5]";
        /*
             1
            / \
           2   3
              / \
             4   5
+
+          Expected output: 1,2,3,4,5
         */
         PreOrderRecursiveTraversal sol = new PreOrderRecursiveTraversal();
-        System.out.println(sol.preOrder(serializator.deserialize(treeSample)));
+        System.out.println(sol.preOrder(serializer.deserialize(treeSample)));
     }
 }

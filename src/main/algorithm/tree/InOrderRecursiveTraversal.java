@@ -24,16 +24,17 @@ public class InOrderRecursiveTraversal {
     }
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,3,n,n,4,5]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,3,null,null,4,5]";
        /*
             1
            / \
           2   3
              / \
             4   5
+         Expected output: 2,1,4,3,5
         */
         InOrderRecursiveTraversal sol = new InOrderRecursiveTraversal();
-        System.out.println(sol.inOrder(serializator.deserialize(treeSample)));
+        System.out.println(sol.inOrder(serializer.deserialize(treeSample)));
     }
 }

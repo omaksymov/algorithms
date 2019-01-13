@@ -35,8 +35,8 @@ public class BFSBinaryTreeTraversal {
     }
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,4,n,3,5,6]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,4,null,3,5,6]";
        /*
             1__
            /    \
@@ -46,7 +46,7 @@ public class BFSBinaryTreeTraversal {
             Expected output: [1,2,4,3,5,6]
         */
         BFSBinaryTreeTraversal sol = new BFSBinaryTreeTraversal();
-        List<Integer> res = sol.bfs(serializator.deserialize(treeSample));
+        List<Integer> res = sol.bfs(serializer.deserialize(treeSample));
         System.out.println(res.toString());
     }
 }

@@ -30,17 +30,19 @@ public class PreOrderIterativeTraversal {
     }
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,3,n,n,4,5]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,3,null,null,4,5]";
        /*
             1
            / \
           2   3
              / \
             4   5
+
+         Expected output: [1,2,3,4,5]
         */
         PreOrderIterativeTraversal sol = new PreOrderIterativeTraversal();
-        List<Integer> res = sol.preorderTraversal(serializator.deserialize(treeSample));
+        List<Integer> res = sol.preorderTraversal(serializer.deserialize(treeSample));
         System.out.println(res.toString());
     }
 }

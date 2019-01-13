@@ -38,8 +38,8 @@ public class BinaryTreeLevels {
     }
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,4,n,3,5,6]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,4,null,3,5,6]";
        /*
             1__
            /    \
@@ -49,7 +49,7 @@ public class BinaryTreeLevels {
             Expected output: [[1],[2,4],[3,5,6]]
         */
         BinaryTreeLevels sol = new BinaryTreeLevels();
-        List<List<Integer>> res = sol.levels(serializator.deserialize(treeSample));
+        List<List<Integer>> res = sol.levels(serializer.deserialize(treeSample));
         System.out.println(res.toString());
     }
 }

@@ -32,17 +32,19 @@ public class InOrderIterativeTraversal {
     }
 
     public static void main(String[] args) {
-        BinaryTreeSerializator serializator = new BinaryTreeSerializator();
-        String treeSample = "[1,2,3,n,n,4,5]";
+        BinaryTreeSerializer serializer = new BinaryTreeSerializer();
+        String treeSample = "[1,2,3,null,null,4,5]";
        /*
             1
            / \
           2   3
              / \
             4   5
+
+         Expected output: [2,1,4,3,5]
         */
         InOrderIterativeTraversal sol = new InOrderIterativeTraversal();
-        List<Integer> res = sol.inorderTraversal(serializator.deserialize(treeSample));
+        List<Integer> res = sol.inorderTraversal(serializer.deserialize(treeSample));
         System.out.println(res.toString());
     }
 }
