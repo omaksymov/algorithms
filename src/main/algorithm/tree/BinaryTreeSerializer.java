@@ -27,12 +27,18 @@ public class BinaryTreeSerializer {
         StringBuilder sb = new StringBuilder();
         sb.append('[');
         int levelSize;
+        int nextLevelLastNonNullPos = 0, curLevelLastNonNullPos;
+        int nextLevelPos;
         while (!queue.isEmpty()) {
+            if (nextLevelLastNonNullPos == -1) break;
+            curLevelLastNonNullPos = nextLevelLastNonNullPos;
             levelSize = queue.size();
+            nextLevelPos = -1;
+            nextLevelLastNonNullPos = -1;
             for (int i = 0; i < levelSize; i++) {
                 curNode = queue.poll();
                 if (curNode == null) {
-                    if (i != levelSize - 1) {
+                    if (i < curLevelLastNonNullPos || nextLevelLastNonNullPos != -1) {
                         sb.append(NULL);
                         sb.append(DELIMITER);
                     }
@@ -40,12 +46,15 @@ public class BinaryTreeSerializer {
                 }
                 sb.append(curNode.val);
                 sb.append(DELIMITER);
-                if (!isLeaf(curNode)
-                        || (!queue.isEmpty()
-                            && queue.peek() != null
-                            && !isLeaf(queue.peek()))) {
-                    queue.add(curNode.left);
-                    queue.add(curNode.right);
+                queue.add(curNode.left);
+                nextLevelPos++;
+                if (curNode.left != null) {
+                    nextLevelLastNonNullPos = nextLevelPos;
+                }
+                queue.add(curNode.right);
+                nextLevelPos++;
+                if (curNode.right != null) {
+                    nextLevelLastNonNullPos = nextLevelPos;
                 }
             }
         }
@@ -54,10 +63,6 @@ public class BinaryTreeSerializer {
         }
         sb.append(']');
         return sb.toString();
-    }
-
-    private boolean isLeaf(TreeNode node) {
-        return node != null && node.left == null && node.right == null;
     }
 
     /**
