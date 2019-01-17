@@ -35,8 +35,15 @@ public class PascalTriangleII119Test {
     }
 
     @Test
-    public void getRow() {
-        PascalTriangleII119 solution = new PascalTriangleII119();
+    public void getRow_Solution1() {
+        PascalTriangleII119.Solution1 solution = new PascalTriangleII119.Solution1();
+        List<Integer> res = solution.getRow(testItem.rowIndex);
+        assertArrayEquals(testItem.expectedRow.toArray(), res.toArray());
+    }
+
+    @Test
+    public void getRow_Solution2() {
+        PascalTriangleII119.Solution2 solution = new PascalTriangleII119.Solution2();
         List<Integer> res = solution.getRow(testItem.rowIndex);
         assertArrayEquals(testItem.expectedRow.toArray(), res.toArray());
     }
