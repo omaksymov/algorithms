@@ -31,8 +31,15 @@ public class IsPowerOfTwo231Test {
     }
 
     @Test
-    public void isPowerOfTwo() {
-        IsPowerOfTwo231 solution = new IsPowerOfTwo231();
+    public void isPowerOfTwo_Solution1() {
+        IsPowerOfTwo231.Solution1 solution = new IsPowerOfTwo231.Solution1();
+        boolean isPowerOfTwoActual = solution.isPowerOfTwo(testItem.n);
+        assertEquals(testItem.isPowerOfTwo, isPowerOfTwoActual);
+    }
+
+    @Test
+    public void isPowerOfTwo_Solution2() {
+        IsPowerOfTwo231.Solution2 solution = new IsPowerOfTwo231.Solution2();
         boolean isPowerOfTwoActual = solution.isPowerOfTwo(testItem.n);
         assertEquals(testItem.isPowerOfTwo, isPowerOfTwoActual);
     }
