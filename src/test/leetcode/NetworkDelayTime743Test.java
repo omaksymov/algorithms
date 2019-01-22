@@ -42,10 +42,16 @@ public class NetworkDelayTime743Test {
     }
 
     @Test
-    public void networkDelayTime() {
+    public void networkDelayTime_Solution1() {
         NetworkDelayTime743.Solution1 solution = new NetworkDelayTime743.Solution1();
         int actualTime = solution.networkDelayTime(testItem.times, testItem.nodesCount, testItem.startNode);
         assertEquals(testItem.expectedTime, actualTime);
     }
 
+    @Test
+    public void networkDelayTime_Solution2() {
+        NetworkDelayTime743.Solution2 solution = new NetworkDelayTime743.Solution2();
+        int actualTime = solution.networkDelayTime(testItem.times, testItem.nodesCount, testItem.startNode);
+        assertEquals(testItem.expectedTime, actualTime);
+    }
 }
