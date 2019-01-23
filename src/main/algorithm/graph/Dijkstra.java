@@ -36,10 +36,8 @@ public class Dijkstra {
         distances[startNode] = 0;
         boolean[] visited = new boolean[n + 1];
         unvisitedNodes = new PriorityQueue<>(new NodeDistanceComparator());
-        for (int i = 1; i <=n; i++) {
-            unvisitedNodes.add(i);
-        }
-        int curNode = unvisitedNodes.peek(); // should return startNode
+        unvisitedNodes.add(startNode);
+        int curNode = unvisitedNodes.peek();
         while (curNode != -1) {
             for (Edge e : this.graph.get(curNode)) {
                 checkNode(e.v, distances[curNode] + e.weight, visited);
@@ -61,15 +59,16 @@ public class Dijkstra {
     }
 
     private int getNextNode() {
-        int minDistanceNode = !unvisitedNodes.isEmpty() ? unvisitedNodes.peek() : -1;
-        return minDistanceNode == Integer.MAX_VALUE ? -1 : minDistanceNode;
+        return !unvisitedNodes.isEmpty() ? unvisitedNodes.peek() : -1;
     }
 
     private void checkNode(int node, int distance, boolean[] visited) {
         if (visited[node]) return;
         if (distance < distances[node]) {
+            if (distances[node] != Integer.MAX_VALUE) {
+                unvisitedNodes.remove(node);
+            }
             distances[node] = distance;
-            unvisitedNodes.remove(node);
             unvisitedNodes.add(node);
         }
     }
