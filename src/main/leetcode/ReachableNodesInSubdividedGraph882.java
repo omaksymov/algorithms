@@ -1,9 +1,11 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * Starting with an undirected graph (the "original graph") with nodes from 0 to N-1, subdivisions are made to some of the edges.
@@ -45,9 +47,9 @@ import java.util.Map;
  */
 public class ReachableNodesInSubdividedGraph882 {
     /**
-     * Does not work for large input
+     * Solution based on DFS (depth-first search).
+     * Note: does not work for large input.
      * <p>
-     * TODO: implement Dijkstra's algorithm as second solution, to work on large inputs as well
      */
     static class Solution1 {
         private int count;
@@ -135,6 +137,113 @@ public class ReachableNodesInSubdividedGraph882 {
                 this.b = edge[1];
                 visited = new boolean[edge[2]];
             }
+        }
+    }
+
+    /**
+     * Solution based on version of Dijkstra algorithm for this specific case.
+     */
+    static class Solution2 {
+        private Map<Integer, List<Edge>> graph;
+        private boolean[] isVisited;
+        private PriorityQueue<Integer> unvisitedNodes;
+        private int[] distances;
+        private int M;
+        private int res;
+
+        public int reachableNodes(int[][] edges, int M, int N) {
+            this.M = M;
+            graph = new HashMap<>(N);
+            fillGraph(edges, N);
+            isVisited = new boolean[N];
+            distances = new int[N];
+            fillDistances(N);
+            // according to the problem - we always start from node 0
+            distances[0] = 0;
+            unvisitedNodes = new PriorityQueue<>(new NodeDistanceComparator());
+            unvisitedNodes.add(0);
+            // even when M == 0 - we consider start node (0) visited, so count it always
+            res = 1;
+            dijkstra();
+            return res;
+        }
+
+        private void dijkstra() {
+            int curNode = unvisitedNodes.isEmpty() ? -1 : unvisitedNodes.peek();
+            while (curNode != -1) {
+                for (Edge e : graph.get(curNode)) {
+                    walkOverEdge(e, curNode);
+                }
+                isVisited[curNode] = true;
+                unvisitedNodes.poll();
+                curNode = unvisitedNodes.isEmpty() ? -1 : unvisitedNodes.peek();
+            }
+        }
+
+        private void walkOverEdge(Edge e, int curNode) {
+            int oppositeNode = oppositeNode(e, curNode);
+            if (isVisited[oppositeNode] && e.w == 0) return;
+            int distance = distances[curNode] + e.w;
+            if (distance < M) {
+                // except full walk over edge, we reach the opposite node as well
+                res += e.w;
+                e.w = 0;
+                if (distance + 1 < distances[oppositeNode]) {
+                    if (distances[oppositeNode] == Integer.MAX_VALUE) {
+                        res += 1;
+                    } else {
+                        unvisitedNodes.remove(oppositeNode);
+                    }
+                    distances[oppositeNode] = distance + 1;
+                    unvisitedNodes.add(oppositeNode);
+                }
+            } else {
+                e.w = distance - M;
+                res += M - distances[curNode];
+            }
+        }
+
+        private class NodeDistanceComparator implements Comparator<Integer> {
+            @Override
+            public int compare(Integer i1, Integer i2) {
+                return distances[i1] - distances[i2];
+            }
+        }
+
+        private void fillGraph(int[][] edges, int n) {
+            List<Edge> curNodeEdges;
+            for (int i = 0; i < n; i++) {
+                graph.put(i, new ArrayList<>());
+            }
+            for (int[] edgeItem : edges) {
+                Edge edge = new Edge(edgeItem);
+                curNodeEdges = graph.get(edge.a);
+                curNodeEdges.add(edge);
+                curNodeEdges = graph.get(edge.b);
+                curNodeEdges.add(edge);
+            }
+        }
+
+        private void fillDistances(int n) {
+            for (int i = 0; i < n; i++) {
+                distances[i] = Integer.MAX_VALUE;
+            }
+        }
+
+        private static class Edge {
+            int a;
+            int b;
+            int w;
+
+            private Edge(int[] edge) {
+                this.a = edge[0];
+                this.b = edge[1];
+                this.w = edge[2];
+            }
+        }
+
+        private int oppositeNode(Edge e, int curNodeIndex) {
+            return e.a == curNodeIndex ? e.b : e.a;
         }
     }
 }
