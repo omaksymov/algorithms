@@ -54,8 +54,16 @@ public class LowestCommonAncestorOfBinaryTree236Test {
     }
 
     @Test
-    public void binaryTreePaths() {
+    public void lowestCommonAncestor_Solution1() {
         LowestCommonAncestorOfBinaryTree236.Solution1 solution = new LowestCommonAncestorOfBinaryTree236.Solution1();
+        int actualLCA = solution.lowestCommonAncestor(
+                new BinaryTreeSerializer().deserialize(testItem.serializedTree), testItem.a, testItem.b);
+        assertEquals(testItem.expectedLCA, actualLCA);
+    }
+
+    @Test
+    public void lowestCommonAncestor_Solution2() {
+        LowestCommonAncestorOfBinaryTree236.Solution2 solution = new LowestCommonAncestorOfBinaryTree236.Solution2();
         int actualLCA = solution.lowestCommonAncestor(
                 new BinaryTreeSerializer().deserialize(testItem.serializedTree), testItem.a, testItem.b);
         assertEquals(testItem.expectedLCA, actualLCA);
