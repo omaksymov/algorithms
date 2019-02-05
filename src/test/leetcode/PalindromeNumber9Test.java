@@ -28,6 +28,8 @@ public class PalindromeNumber9Test {
         data.add(new TestItem9(131132, false));
         data.add(new TestItem9(131121, false));
         data.add(new TestItem9(131231, false));
+        data.add(new TestItem9(1000021, false));
+        data.add(new TestItem9(21120, false));
         return data;
     }
 
@@ -38,8 +40,15 @@ public class PalindromeNumber9Test {
     }
 
     @Test
-    public void isPalindrome() {
-        PalindromeNumber9 solution = new PalindromeNumber9();
+    public void isPalindrome_Solution1() {
+        PalindromeNumber9.Solution1 solution = new PalindromeNumber9.Solution1();
+        boolean actualRes = solution.isPalindrome(testItem.x);
+        assertEquals(testItem.isPalindrome, actualRes);
+    }
+
+    @Test
+    public void isPalindrome_Solution2() {
+        PalindromeNumber9.Solution2 solution = new PalindromeNumber9.Solution2();
         boolean actualRes = solution.isPalindrome(testItem.x);
         assertEquals(testItem.isPalindrome, actualRes);
     }
