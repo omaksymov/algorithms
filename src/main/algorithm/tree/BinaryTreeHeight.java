@@ -6,20 +6,44 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
-    Compute the height of the binary tree
+ * Compute the height of the binary tree
  */
 public class BinaryTreeHeight {
 
     static class RecursiveSolution {
-        public int heightOfTheTree(TreeNode root) {
+        public int treeHeight(TreeNode root) {
             if (root == null) return 0;
-            return 1 + Math.max(heightOfTheTree(root.left), heightOfTheTree(root.right));
+            return 1 + Math.max(treeHeight(root.left), treeHeight(root.right));
         }
     }
 
-    static class IterativeSolution {
+    static class CommonIterativeSolution {
+        public int treeHeight(TreeNode root) {
+            if (root == null) return 0;
+            Deque<TreeNode> queue = new ArrayDeque<>();
+            queue.add(root);
+            int height = 0;
+            TreeNode curNode;
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                height++;
+                for (int i = 0; i < size; i++) {
+                    curNode = queue.poll();
+                    if (curNode.left != null) {
+                        queue.add(curNode.left);
+                    }
+                    if (curNode.right != null) {
+                        queue.add(curNode.right);
+                    }
+                }
+            }
+            return height;
+        }
+    }
 
-        public int heightOfTheTree(TreeNode root) {
+    static class AnotherIterativeSolution {
+
+        public int treeHeight(TreeNode root) {
             if (root == null) return 0;
             Deque<TreeNode> stack = new ArrayDeque<>();
             Deque<Integer> heights = new ArrayDeque<>();

@@ -76,15 +76,23 @@ public class BinaryTreeHeightTest {
     @Test
     public void treeHeight_Recursive() {
         BinaryTreeHeight.RecursiveSolution solution = new BinaryTreeHeight.RecursiveSolution();
-        int actualHeight = solution.heightOfTheTree(
+        int actualHeight = solution.treeHeight(
                 new BinaryTreeSerializer().deserialize(serializedTree));
         assertEquals(expectedHeight, actualHeight);
     }
 
     @Test
     public void treeHeight_Iterative() {
-        BinaryTreeHeight.IterativeSolution solution = new BinaryTreeHeight.IterativeSolution();
-        int actualHeight = solution.heightOfTheTree(
+        BinaryTreeHeight.AnotherIterativeSolution solution = new BinaryTreeHeight.AnotherIterativeSolution();
+        int actualHeight = solution.treeHeight(
+                new BinaryTreeSerializer().deserialize(serializedTree));
+        assertEquals(expectedHeight, actualHeight);
+    }
+
+    @Test
+    public void treeHeight_MoreCommonIterative() {
+        BinaryTreeHeight.CommonIterativeSolution solution = new BinaryTreeHeight.CommonIterativeSolution();
+        int actualHeight = solution.treeHeight(
                 new BinaryTreeSerializer().deserialize(serializedTree));
         assertEquals(expectedHeight, actualHeight);
     }
